@@ -3,11 +3,22 @@ const OfficeConfig = require('../models/OfficeConfig');
 const { haversineDistanceMeters } = require('../utils/distance.util');
 const { nowUTC, toLocalTimezone } = require('../utils/timezone.util');
 
+const isGeoFenceStrict = () => String(process.env.GEO_FENCE_STRICT || 'false').toLowerCase() === 'true';
+
 const validateWithinOfficeRadius = async (latitude, longitude) => {
   const officeConfig = await OfficeConfig.findOne().sort({ updatedAt: -1 });
 
   if (!officeConfig) {
-    return { allowed: false, reason: 'Office configuration is missing' };
+    if (!isGeoFenceStrict()) {
+      return {
+        allowed: true,
+        reason: 'Office configuration is missing. Geofence validation skipped (GEO_FENCE_STRICT=false).',
+        officeConfig: null,
+        skipped: true
+      };
+    }
+
+    return { allowed: false, reason: 'Office configuration is missing. Ask admin to configure office.' };
   }
 
   const distance = haversineDistanceMeters(
@@ -19,8 +30,9 @@ const validateWithinOfficeRadius = async (latitude, longitude) => {
 
   return {
     allowed: distance <= officeConfig.allowedRadiusMeters,
-    reason: `Distance from office: ${Math.round(distance)} meters`,
-    officeConfig
+    reason: `Distance from office: ${Math.round(distance)} meters. Allowed: ${officeConfig.allowedRadiusMeters} meters.`,
+    officeConfig,
+    skipped: false
   };
 };
 
@@ -50,7 +62,11 @@ const checkIn = async (req, res, next) => {
       message: 'Check-in successful',
       attendanceId: attendance._id,
       checkInUTC: attendance.checkInUTC,
-      checkInLocal: toLocalTimezone(attendance.checkInUTC, timezone)
+      checkInLocal: toLocalTimezone(attendance.checkInUTC, timezone),
+      geofence: {
+        skipped: locationValidation.skipped,
+        note: locationValidation.reason
+      }
     });
   } catch (error) {
     return next(error);
@@ -80,7 +96,11 @@ const checkOut = async (req, res, next) => {
     return res.json({
       message: 'Check-out successful',
       checkOutUTC: attendance.checkOutUTC,
-      checkOutLocal: toLocalTimezone(attendance.checkOutUTC, timezone)
+      checkOutLocal: toLocalTimezone(attendance.checkOutUTC, timezone),
+      geofence: {
+        skipped: locationValidation.skipped,
+        note: locationValidation.reason
+      }
     });
   } catch (error) {
     return next(error);

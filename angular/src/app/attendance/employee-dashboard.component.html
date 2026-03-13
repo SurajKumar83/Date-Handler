@@ -8,6 +8,7 @@
   <button mat-stroked-button (click)="loadLocation()">Refresh Location</button>
 
   <p>{{ message }}</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
 </mat-card>
 
 <mat-card>

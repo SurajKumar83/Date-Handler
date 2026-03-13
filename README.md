@@ -107,6 +107,14 @@ Payload for checkin/checkout:
 - Admin configures `officeLatitude`, `officeLongitude`, `allowedRadiusMeters`.
 - Attendance endpoints use Haversine formula and reject requests outside radius.
 
+### Geofence strict mode
+
+By default, this scaffold runs with `GEO_FENCE_STRICT=false` for local development.
+
+- `GEO_FENCE_STRICT=false`: check-in/out will proceed even when office config is not set (response includes a note).
+- `GEO_FENCE_STRICT=true`: check-in/out returns `403` until admin sets office coordinates/radius.
+
+
 ## Seed Data
 
 ```bash
