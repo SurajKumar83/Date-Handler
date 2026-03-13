@@ -1,0 +1,42 @@
+<mat-card>
+  <h2>Admin Dashboard</h2>
+  <form [formGroup]="officeForm" (ngSubmit)="saveOfficeConfig()">
+    <mat-form-field>
+      <mat-label>Office Latitude</mat-label>
+      <input matInput formControlName="officeLatitude" type="number" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Office Longitude</mat-label>
+      <input matInput formControlName="officeLongitude" type="number" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Allowed Radius (meters)</mat-label>
+      <input matInput formControlName="allowedRadiusMeters" type="number" />
+    </mat-form-field>
+    <button mat-raised-button color="primary">Save Office Config</button>
+  </form>
+  <p>{{ message }}</p>
+</mat-card>
+
+<mat-card>
+  <h3>Attendance Records</h3>
+  <table mat-table [dataSource]="records">
+    <ng-container matColumnDef="employee">
+      <th mat-header-cell *matHeaderCellDef>Employee</th>
+      <td mat-cell *matCellDef="let row">{{ row.employeeId?.name }} ({{ row.employeeId?.email }})</td>
+    </ng-container>
+
+    <ng-container matColumnDef="checkInUTC">
+      <th mat-header-cell *matHeaderCellDef>Check In (UTC)</th>
+      <td mat-cell *matCellDef="let row">{{ row.checkInUTC }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="checkOutUTC">
+      <th mat-header-cell *matHeaderCellDef>Check Out (UTC)</th>
+      <td mat-cell *matCellDef="let row">{{ row.checkOutUTC || 'Open' }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['employee','checkInUTC','checkOutUTC']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['employee','checkInUTC','checkOutUTC'];"></tr>
+  </table>
+</mat-card>
