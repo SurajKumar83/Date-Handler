@@ -1,15 +1,25 @@
-require('dotenv').config({ path: '../.env' });
+const path = require('path');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const User = require('../models/User');
 const OfficeConfig = require('../models/OfficeConfig');
+const { loadEnv } = require('../config/env');
+
+loadEnv();
 
 (async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    const mongoUri = process.env.MONGO_URI;
+    if (typeof mongoUri !== 'string' || !mongoUri.trim()) {
+      throw new Error(
+        `MONGO_URI is missing. Create ${path.resolve(__dirname, '../../.env')} and set MONGO_URI.`
+      );
+    }
 
-    const adminEmail = 'admin@attendance.local';
-    const adminPassword = await bcrypt.hash('Admin@123', 10);
+    await mongoose.connect(mongoUri);
+
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
 
     await User.updateOne(
       { email: adminEmail },
@@ -38,7 +48,7 @@ const OfficeConfig = require('../models/OfficeConfig');
     console.log('Seed completed');
     process.exit(0);
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     process.exit(1);
   }
 })();
