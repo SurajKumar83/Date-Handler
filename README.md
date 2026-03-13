@@ -54,22 +54,6 @@ npm start
 Backend: `http://localhost:5000`  
 Frontend: `http://localhost:4200`
 
-
-## Common Startup Error
-
-If you see:
-
-```
-The `uri` parameter to `openUri()` must be a string, got "undefined"
-```
-
-it means `MONGO_URI` is not loaded. Fix with:
-
-```bash
-cp .env.example .env
-# then edit .env and set MONGO_URI
-```
-
 ## API Documentation
 
 ### Auth
