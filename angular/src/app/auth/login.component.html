@@ -1,17 +1,52 @@
-<mat-card>
-  <h2>Attendance Login</h2>
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" type="email" />
-    </mat-form-field>
+<div class="auth-shell">
+  <div class="panel login-panel">
+    <div class="blob blob-top"></div>
+    <div class="blob blob-mid"></div>
+    <div class="blob blob-dot"></div>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Password</mat-label>
-      <input matInput formControlName="password" type="password" />
-    </mat-form-field>
+    <div class="content">
+      <p class="welcome">Hello There!</p>
+      <h2>Login</h2>
 
-    <button mat-raised-button color="primary" [disabled]="loading">Login</button>
-    <p *ngIf="error" class="error">{{ error }}</p>
-  </form>
-</mat-card>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <mat-form-field appearance="fill" class="full-width soft-field">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="User Name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width soft-field">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" placeholder="Password" />
+        </mat-form-field>
+
+        <button mat-raised-button class="auth-btn" [disabled]="loading">{{ loading ? 'Signing In...' : 'Sign In' }}</button>
+        <p *ngIf="error" class="error">{{ error }}</p>
+      </form>
+
+      <div class="divider"><span>Or</span></div>
+      <div class="social-row" aria-hidden="true">
+        <div class="social google">G</div>
+        <div class="social facebook">f</div>
+      </div>
+
+      <p class="signup-hint">Don’t have an account ? <strong>Create</strong></p>
+    </div>
+  </div>
+
+  <div class="panel signup-panel">
+    <div class="blob blob-curve"></div>
+    <div class="content">
+      <h2>Sign Up</h2>
+      <div class="mock-field">Name</div>
+      <div class="mock-field">Email Id</div>
+      <div class="mock-field">Create Username</div>
+      <div class="mock-field">Create Password</div>
+      <div class="terms">
+        <span class="radio"></span>
+        <p>I do agree with all <u>Terms & Condition</u></p>
+      </div>
+      <button mat-raised-button class="auth-btn secondary">Sign Up</button>
+      <p class="tagline">Experience Life<br />With a touch of Nature</p>
+    </div>
+  </div>
+</div>
