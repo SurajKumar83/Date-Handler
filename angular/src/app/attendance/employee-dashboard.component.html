@@ -1,0 +1,29 @@
+<mat-card>
+  <h2>Employee Dashboard</h2>
+  <p>Timezone: {{ timezone }}</p>
+  <p>Current Location: {{ location.latitude }}, {{ location.longitude }}</p>
+
+  <button mat-raised-button color="primary" (click)="checkIn()">Check In</button>
+  <button mat-raised-button color="accent" (click)="checkOut()">Check Out</button>
+  <button mat-stroked-button (click)="loadLocation()">Refresh Location</button>
+
+  <p>{{ message }}</p>
+</mat-card>
+
+<mat-card>
+  <h3>Last 7 Days Attendance</h3>
+  <table mat-table [dataSource]="history.slice(0,7)">
+    <ng-container matColumnDef="checkInLocal">
+      <th mat-header-cell *matHeaderCellDef>Check In</th>
+      <td mat-cell *matCellDef="let row">{{ row.checkInLocal }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="checkOutLocal">
+      <th mat-header-cell *matHeaderCellDef>Check Out</th>
+      <td mat-cell *matCellDef="let row">{{ row.checkOutLocal || 'N/A' }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['checkInLocal','checkOutLocal']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['checkInLocal','checkOutLocal'];"></tr>
+  </table>
+</mat-card>
