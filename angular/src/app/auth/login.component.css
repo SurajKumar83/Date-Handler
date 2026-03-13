@@ -140,34 +140,18 @@ h2 {
   background: linear-gradient(165deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.1));
 }
 
-.mock-field {
-  height: 34px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.34);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  margin-bottom: 9px;
-  color: #eef3ff;
+.terms {
+  margin: 8px 0 14px;
+  color: #edf2ff;
   font-size: 12px;
 }
 
-.terms {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-  margin: 10px 0 12px;
-  font-size: 11px;
-  color: #edf2ff;
+::ng-deep .terms .mdc-form-field > label {
+  color: #edf2ff !important;
 }
 
-.radio {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid #d9dcff;
-  margin-top: 2px;
+::ng-deep .terms .mdc-checkbox__background {
+  border-color: rgba(255, 255, 255, 0.7) !important;
 }
 
 .tagline {
@@ -223,6 +207,12 @@ h2 {
 
 .error {
   color: #ffd2db;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.success {
+  color: #d6ffea;
   font-size: 12px;
   margin-top: 8px;
 }

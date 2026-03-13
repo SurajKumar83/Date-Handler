@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login.component';
@@ -28,7 +29,8 @@ import { AppRoutingModule } from './app-routing.module';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule
   ],
   bootstrap: [AppComponent]
 })

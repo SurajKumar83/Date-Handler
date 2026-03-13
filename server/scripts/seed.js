@@ -18,8 +18,8 @@ loadEnv();
 
     await mongoose.connect(mongoUri);
 
-    const adminEmail = process.env.ADMIN_EMAIL;
-    const adminPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
+    const adminEmail = 'admin@attendance.local';
+    const adminPassword = await bcrypt.hash('Admin@123', 10);
 
     await User.updateOne(
       { email: adminEmail },

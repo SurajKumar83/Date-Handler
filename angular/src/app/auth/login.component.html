@@ -8,10 +8,10 @@
       <p class="welcome">Hello There!</p>
       <h2>Login</h2>
 
-      <form [formGroup]="form" (ngSubmit)="submit()">
+      <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
         <mat-form-field appearance="fill" class="full-width soft-field">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" type="email" placeholder="User Name" />
+          <input matInput formControlName="email" type="email" placeholder="Email" />
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="full-width soft-field">
@@ -19,7 +19,9 @@
           <input matInput formControlName="password" type="password" placeholder="Password" />
         </mat-form-field>
 
-        <button mat-raised-button class="auth-btn" [disabled]="loading">{{ loading ? 'Signing In...' : 'Sign In' }}</button>
+        <button type="submit" mat-raised-button class="auth-btn" [disabled]="loading">
+          {{ loading ? 'Signing In...' : 'Sign In' }}
+        </button>
         <p *ngIf="error" class="error">{{ error }}</p>
       </form>
 
@@ -29,23 +31,49 @@
         <div class="social facebook">f</div>
       </div>
 
-      <p class="signup-hint">Don’t have an account ? <strong>Create</strong></p>
+      <p class="signup-hint">Use signup form on the right to create account.</p>
     </div>
   </div>
 
   <div class="panel signup-panel">
     <div class="blob blob-curve"></div>
+
     <div class="content">
       <h2>Sign Up</h2>
-      <div class="mock-field">Name</div>
-      <div class="mock-field">Email Id</div>
-      <div class="mock-field">Create Username</div>
-      <div class="mock-field">Create Password</div>
-      <div class="terms">
-        <span class="radio"></span>
-        <p>I do agree with all <u>Terms & Condition</u></p>
-      </div>
-      <button mat-raised-button class="auth-btn secondary">Sign Up</button>
+
+      <form [formGroup]="signUpForm" (ngSubmit)="submitSignUp()">
+        <mat-form-field appearance="fill" class="full-width soft-field">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" type="text" placeholder="Name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width soft-field">
+          <mat-label>Email Id</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="Email" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width soft-field">
+          <mat-label>Create Password</mat-label>
+          <input matInput formControlName="password" type="password" placeholder="Create Password" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width soft-field">
+          <mat-label>Timezone</mat-label>
+          <input matInput formControlName="timezone" type="text" placeholder="Asia/Kolkata" />
+        </mat-form-field>
+
+        <div class="terms">
+          <mat-checkbox formControlName="terms">I agree with Terms & Condition</mat-checkbox>
+        </div>
+
+        <button type="submit" mat-raised-button class="auth-btn secondary" [disabled]="signUpLoading">
+          {{ signUpLoading ? 'Creating...' : 'Sign Up' }}
+        </button>
+
+        <p *ngIf="signUpError" class="error">{{ signUpError }}</p>
+        <p *ngIf="signUpSuccess" class="success">{{ signUpSuccess }}</p>
+      </form>
+
       <p class="tagline">Experience Life<br />With a touch of Nature</p>
     </div>
   </div>
