@@ -1,0 +1,228 @@
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(2, minmax(280px, 340px));
+  gap: 20px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(154, 95, 255, 0.45), transparent 38%),
+    radial-gradient(circle at 85% 10%, rgba(67, 197, 255, 0.35), transparent 42%),
+    linear-gradient(145deg, #7e8ea5, #4e5f7e 55%, #3c4762);
+}
+
+.panel {
+  position: relative;
+  min-height: 560px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.08));
+  box-shadow:
+    0 24px 50px rgba(12, 17, 36, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15), transparent 40%);
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 28px 24px;
+}
+
+.welcome {
+  margin: 0;
+  color: #eef3ff;
+  font-weight: 500;
+}
+
+h2 {
+  margin: 10px 0 16px;
+  color: #f7f8ff;
+  font-weight: 600;
+}
+
+.login-panel .content {
+  margin-top: 88px;
+}
+
+.soft-field {
+  margin-bottom: 8px;
+}
+
+::ng-deep .soft-field .mat-mdc-text-field-wrapper {
+  background: rgba(255, 255, 255, 0.28) !important;
+  border-radius: 12px !important;
+}
+
+::ng-deep .soft-field .mdc-line-ripple {
+  display: none;
+}
+
+::ng-deep .soft-field .mdc-floating-label,
+::ng-deep .soft-field input {
+  color: #eef1ff !important;
+}
+
+.auth-btn {
+  width: 108px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: linear-gradient(90deg, rgba(73, 17, 170, 0.95), rgba(29, 76, 185, 0.95));
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 8px 18px rgba(41, 20, 120, 0.35);
+}
+
+.secondary {
+  width: 120px;
+}
+
+.divider {
+  margin: 18px 0 14px;
+  text-align: center;
+  color: #e6eaf9;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: rgba(232, 238, 255, 0.5);
+}
+
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.social {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.facebook { color: #3b5998; }
+.google { color: #ea4335; }
+
+.signup-hint {
+  margin-top: 26px;
+  text-align: center;
+  font-size: 12px;
+  color: #eef2ff;
+}
+
+.signup-panel {
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.1));
+}
+
+.terms {
+  margin: 8px 0 14px;
+  color: #edf2ff;
+  font-size: 12px;
+}
+
+::ng-deep .terms .mdc-form-field > label {
+  color: #edf2ff !important;
+}
+
+::ng-deep .terms .mdc-checkbox__background {
+  border-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.tagline {
+  margin-top: 42px;
+  color: #fbfcff;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.blob {
+  position: absolute;
+  background: radial-gradient(circle at top right, rgba(118, 50, 203, 0.8), rgba(34, 0, 99, 0.6) 70%);
+}
+
+.blob-top {
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 145px;
+  border-bottom-left-radius: 46px;
+  border-bottom-right-radius: 46px;
+}
+
+.blob-mid {
+  top: 40px;
+  right: -48px;
+  width: 190px;
+  height: 140px;
+  border-radius: 56% 44% 67% 33% / 45% 50% 50% 55%;
+  border: 8px solid rgba(240, 242, 255, 0.4);
+}
+
+.blob-dot {
+  top: 78px;
+  left: 18px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.blob-curve {
+  inset: 0;
+  background: radial-gradient(circle at 100% 0%, rgba(101, 31, 168, 0.85) 10%, rgba(32, 0, 98, 0.6) 68%);
+  clip-path: ellipse(90% 68% at 85% 0%);
+}
+
+.signup-panel .content { color: #f6f8ff; }
+
+.signup-panel .tagline {
+  position: absolute;
+  bottom: 26px;
+}
+
+.error {
+  color: #ffd2db;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.success {
+  color: #d6ffea;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+@media (max-width: 840px) {
+  .auth-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    width: min(340px, 100%);
+  }
+}
